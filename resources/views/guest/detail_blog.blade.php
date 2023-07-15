@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
     <div class="layout-detail">
@@ -91,17 +91,18 @@
                 </div>
             @endif
             <div class="all-comment">
-                @include ('layouts.item_comment', ['comments', $comments])
+                @include ('layouts.components.item_comment', ['comments', $comments])
             </div>
-            <div id="viewMoreComment"
-                class="show-all-comment" 
-                data-id="{{ $blog->id }}" 
-                data-route="{{ route('comment.view.more') }}"
-                data-page-last="{{ $comments->lastPage() }}"
-            >
-                {{ __('blog.text_view_more') }}
-            </div>
-
+            @if ($blog->comments()->count() > 5)
+                <div id="viewMoreComment"
+                    class="show-all-comment" 
+                    data-id="{{ $blog->id }}" 
+                    data-route="{{ route('comment.view.more') }}"
+                    data-page-last="{{ $comments->lastPage() }}"
+                >
+                    {{ __('blog.text_view_more') }}
+                </div>
+            @endif
         </div>
     </div>
     <div class="box-delete">
@@ -122,9 +123,7 @@
         </div>
     </div>
 
-    @section('js')
-        @vite(['resources/js/setup.js'])
-        @vite(['resources/js/detail.js'])
-        @vite(['resources/js/comment.js'])
-    @endsection
+    @vite(['resources/js/setup.js'])
+    @vite(['resources/js/detail.js'])
+    @vite(['resources/js/comment.js'])
 @endsection

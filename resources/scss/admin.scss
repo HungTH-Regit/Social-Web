@@ -6,6 +6,20 @@
             .mt-2 {
                 .nav-sidebar {
                     .nav-item {
+                        form {
+                            button {
+                                outline: none;
+                                border: none;
+                                background: none;
+                                i, p {
+                                    color: #c2c7d0;
+                                }
+
+                                // i {
+                                //     color: white;
+                                // }
+                            }
+                        }
                         a {
                             i {
                                 margin-right: 10px;
@@ -232,4 +246,3 @@
         }
     }
 }
-

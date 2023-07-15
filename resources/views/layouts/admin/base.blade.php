@@ -86,10 +86,13 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('logout') }}" class="nav-link">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    {{ __('admin.navbar_logout') }}
-                  </a>
+                  <form method="POST" action="{{ route('logout') }}" class="nav-link">
+                    @csrf
+                    <button>
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                      <p>{{ __('admin.navbar_logout') }}</p>
+                    </button>
+                  </form>
               </li>
               </ul>
             </nav>
@@ -97,7 +100,7 @@
       </aside>
       <div class="content-wrapper">
         <div class="notification">
-          @include('layouts.notification')
+          @include('layouts.components.notification')
         </div>
         <section class="content-header">
           <div class="container-fluid">

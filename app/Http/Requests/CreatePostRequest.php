@@ -22,6 +22,7 @@ class CreatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'category_id' => 'required',
             'title' => 'required|max:255',
             'content' => 'required',
             'image' => 'required',

@@ -1,4 +1,4 @@
-@extends('admin.layouts.components')
+@extends('layouts.admin.base')
 
 @section('title_page')
   <h1>{{ __('admin.title_page_blog') }}</h1>
@@ -113,7 +113,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                @include('layouts.paginate')
+                @include('layouts.components.pagination')
             </div>
         </div>
     </section>

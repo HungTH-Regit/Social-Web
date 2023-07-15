@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
-    <div class="layout-create">
+    <div class="layout-update">
         <div class="dashboard">
             <a href="{{ route('blogs.home') }}">Home</a>
             <i class="fa-solid fa-chevron-right"></i>

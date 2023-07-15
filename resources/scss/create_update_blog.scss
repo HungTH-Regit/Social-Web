@@ -1,4 +1,4 @@
-.layout-create {
+.layout-create, .layout-update {
     margin: 156px 106px 40px 100px;
     .dashboard {
         height: 23px;
@@ -49,7 +49,6 @@
             select {
                 width: 334px;
                 padding: 1px 174px 0 14px;
-                margin-bottom: 34px;
                 color: $text-color-grey;
             }
             .title {
@@ -72,6 +71,9 @@
                 padding: 1px 0 0 19px;
             }
         }
+        .item-title {
+            margin-top: 34px;       
+        }
         .img-preview {
             width: 270px;
             height: 170px;
@@ -91,6 +93,13 @@
             padding: 8px 30px;
             border:1px solid $color-border-primary;
             border-radius: 5px;
+        }
+    }
+}
+.layout-update {
+    form {
+        .img-preview {
+            display: block;
         }
     }
 }

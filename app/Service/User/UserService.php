@@ -15,16 +15,17 @@ class UserService
     public function getAllBlog(array $dataSearch = []): LengthAwarePaginator
     {
         $query = Post::where('user_id', Auth::id());
-        if (isset($dataSearch['data'])) {
+        if ($dataSearch['data']) {
             $query->where('title', 'like', '%' . $dataSearch['data'] . '%');
         }
-        if (isset($dataSearch['categoryId'])) {
+        if ($dataSearch['categoryId']) {
             $query->where(['category_id' => $dataSearch['categoryId']]);
         }
 
         return $query->with('user')
             ->orderBy('id')
-            ->paginate(Post::LIMIT_BLOG_PAGE);
+            ->paginate(Post::LIMIT_BLOG_PAGE)
+            ->withQueryString($dataSearch);
     }
 
     public function updatePassword(object $data): int|string

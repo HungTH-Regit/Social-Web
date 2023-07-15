@@ -35,7 +35,7 @@ class AuthController extends Controller
             if (Auth::user()->role === User::ROLE_ADMIN) {
                 return redirect()->route('admin.dashboard');
             }
-            return redirect()->route('blogs.home')->with('success', __('auth.login_success'));
+            return redirect()->route('blogs.home');
         }
 
         return redirect()->route('view.login')->with('message', __('auth.login_error'));
@@ -57,7 +57,7 @@ class AuthController extends Controller
         if (!$message) {
             return redirect()->route('view.login')->with('message', $message);
         }
-        
+
         return redirect()->route('view.login')->with('success', __('auth.verify_success'));
     }
 

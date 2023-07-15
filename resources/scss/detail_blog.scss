@@ -355,7 +355,7 @@
             .header-box {
                 @include centerVertical;
                 justify-content: space-between;
-                border-bottom: 1px solid $border-bottom-item;
+                border-bottom: 1px solid $border-color-default;
                 p {
                     @include fontNotoBold;
                     font-size: 20px;
@@ -377,7 +377,7 @@
             }
             .form-request {
                 padding: 12px 53px 16px;
-                border-top: 1px solid $border-bottom-item;
+                border-top: 1px solid $border-color-default;
                 @include centerVertical;
                 justify-content: space-between;
                 div, button {

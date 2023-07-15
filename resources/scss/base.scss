@@ -11,7 +11,6 @@ $color-cancel: #B0B0B0;
 $color-success: #18B727;
 $border-input: #DEDEDE;
 $border-btn: #E4E4E4;
-$border-bottom-item: #D9D9D9;
 $border-color-default: #CCCCCC;
 $background-btn-primary: #007BFF;
 $background-create: #D9D9D9;
@@ -107,28 +106,6 @@ $background-btn-not: #ABB1AB;
     }
     li + li {
         margin-left: 10px;
-    }
-}
-
-@mixin notify {
-    .notification {
-        position: fixed;
-        z-index: 3;
-        min-width: 100px;
-        max-width: 50%;
-        max-height: 100px;
-        top: 130px;
-        right: 10px;
-        .alert {
-            margin: 0;
-            padding: 15px 20px;
-            box-shadow: 0px 1px 14px rgba(0, 0, 0, 0.25);
-            @include centerVertical;
-            strong {
-                @include fontNotoBold;
-                font-size: 18px;
-            }
-        }
     }
 }
 ::-webkit-input-placeholder {
@@ -338,7 +315,6 @@ footer {
         margin: 37px auto 37px;
     }
 }
-
 .box-delete {
     overflow: hidden;
     position: fixed;
@@ -357,7 +333,7 @@ footer {
         .header-box {
             @include centerVertical;
             justify-content: space-between;
-            border-bottom: 1px solid $border-bottom-item;
+            border-bottom: 1px solid $border-color-default;
             p {
                 @include fontNotoBold;
                 font-size: 20px;
@@ -379,7 +355,7 @@ footer {
         }
         .form-request {
             padding: 12px 53px 16px;
-            border-top: 1px solid $border-bottom-item;
+            border-top: 1px solid $border-color-default;
             @include centerVertical;
             justify-content: space-between;
             .btn {
@@ -403,4 +379,22 @@ footer {
         }
     }
 }
-@include notify();
+.notification {
+    position: fixed;
+    z-index: 3;
+    min-width: 100px;
+    max-width: 50%;
+    max-height: 100px;
+    top: 130px;
+    right: 10px;
+    .alert {
+        margin: 0;
+        padding: 15px 20px;
+        box-shadow: 0px 1px 14px rgba(0, 0, 0, 0.25);
+        @include centerVertical;
+        strong {
+            @include fontNotoBold;
+            font-size: 18px;
+        }
+    }
+}

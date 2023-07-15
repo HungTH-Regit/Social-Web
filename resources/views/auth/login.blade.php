@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.authentication.base')
 
 @section('content')
     <form method="POST" action="{{ route('post.login') }}" class="form-auth form-auth-login">

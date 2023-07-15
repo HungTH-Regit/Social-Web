@@ -1,4 +1,4 @@
-@extends('admin.layouts.components')
+@extends('layouts.admin.base')
 
 @section('title_page')
   <h1>{{ __('admin.title_page_user') }}</h1>
@@ -54,9 +54,6 @@
                     <a class="btn btn-info btn-sm" href="{{ route('admin.user.profile', ['user' => $user]) }}">
                       <i class="fa-regular fa-pen-to-square"></i>
                     </a>
-                    {{-- <a class="btn btn-danger btn-sm delete-user" data-route='{{ route('admin.user.delete', ['user' => $user]) }}'>
-                      <i class="fa-solid fa-trash-can"></i>
-                    </a> --}}
                     <button class="btn btn-danger btn-sm">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -112,5 +109,4 @@
         @endif
     </ul>
   </section>
-  @vite(['resources/js/user.js'])
 @endsection

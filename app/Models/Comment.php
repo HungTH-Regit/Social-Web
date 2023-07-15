@@ -12,7 +12,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $table = "comments";
-    
+
     const LIMIT_COMMENT_DEFAULT = 5;
 
     protected $fillable = [
