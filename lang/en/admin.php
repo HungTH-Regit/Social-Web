@@ -4,6 +4,7 @@
         'navbar_user' => 'Users',
         'navbar_blog' => 'Blogs',
         'navbar_all_blog' => 'All Blog',
+        'navbar_logout' => 'Log out',
         'navbar_blogs_not_approved' => 'Blogs not Approved',
 
         'content_header_manager' => 'Management',

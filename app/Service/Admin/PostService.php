@@ -12,13 +12,13 @@ class PostService
     public function getAllBlog(int $status): LengthAwarePaginator
     {
         if ($status === Post::STATUS_ALL_BLOG) {
-            return Post::paginate(Post::LIMIT_BLOG_PAGE);
+            return Post::with('likes')->paginate(Post::LIMIT_BLOG_PAGE);
         }
 
-        return Post::notApproved()->paginate(Post::LIMIT_BLOG_PAGE);
+        return Post::notApproved()->with('likes')->paginate(Post::LIMIT_BLOG_PAGE);
     }
 
-    public function searchBlog(array $dataSearch, int $status)
+    public function searchBlog(array $dataSearch, int $status): LengthAwarePaginator
     {
         $query = Post::where('title', 'like', '%' . $dataSearch['data'] . '%')
             ->orWhere('content', 'like', '%' . $dataSearch['data'] . '%');

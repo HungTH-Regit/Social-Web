@@ -14,6 +14,7 @@
         'text_no_blog' => 'You have no posts yet',
         'text_no_found_blog' => 'No Blog found',
         'text_no_found_related' => 'No posts found in the same category',
+        'text_view_more' => 'View More Comment',
 
         'btn_create_blog' => 'Create Blog',
         'btn_update_blog' => 'Update Blog',

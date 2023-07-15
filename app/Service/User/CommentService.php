@@ -4,18 +4,20 @@ namespace App\Service\User;
 
 use Exception;
 use App\Models\Comment;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 
 class CommentService
 {
-    public function getAll(int $id): Collection
+    public function getAll(int $id): LengthAwarePaginator
     {
         return Comment::where('post_id', $id)
             ->with('user')
-            ->get();
+            ->paginate(Comment::LIMIT_COMMENT_DEFAULT);
     }
-    public function create(object $dataComment, object $blog): bool
+
+    public function create(object $dataComment, object $blog)
     {
         try {
             Comment::create([

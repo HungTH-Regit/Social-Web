@@ -6,6 +6,20 @@
             .mt-2 {
                 .nav-sidebar {
                     .nav-item {
+                        form {
+                            button {
+                                outline: none;
+                                border: none;
+                                background: none;
+                                i, p {
+                                    color: #c2c7d0;
+                                }
+
+                                // i {
+                                //     color: white;
+                                // }
+                            }
+                        }
                         a {
                             i {
                                 margin-right: 10px;
@@ -148,7 +162,7 @@
         .card-body {
             .row {
                 flex-wrap: wrap;
-                .align-items-stretch {
+                .item-user {
                     .card {
                         .card-body {
                             .box-info-user {
@@ -182,6 +196,9 @@
                             }
                         }
                     }
+                }
+                .box-delete {
+                    display: none;
                 }
             }
         }
@@ -229,4 +246,3 @@
         }
     }
 }
-

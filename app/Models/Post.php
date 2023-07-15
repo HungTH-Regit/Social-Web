@@ -20,7 +20,7 @@ class Post extends Model
 
     const STATUS_ALL_BLOG = 2;
 
-    const LIMIT_BLOG_PAGE = 3;
+    const LIMIT_BLOG_PAGE = 6;
 
     const LIMIT_BLOG_RELATED = 4;
 

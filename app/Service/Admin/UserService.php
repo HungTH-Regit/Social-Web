@@ -4,10 +4,9 @@ namespace App\Service\Admin;
 
 use Exception;
 use App\Models\User;
-use App\Models\Post;
-use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -18,18 +17,21 @@ class UserService
 
     public function delete(object $user): bool
     {
-        DB::beginTransaction();
         try {
+            if (Auth::id() === $user->id) {
+                return false;
+            }
+            DB::beginTransaction();
             $user->likes()->detach();
-            Comment::where('user_id', $user->id)->delete();
-            Post::where('user_id', $user->id)->delete();
+            $user->comments()->delete();
+            $user->blogs()->delete();
             $user->delete();
             DB::commit();
 
             return true;
         } catch (Exception $e) {
             DB::rollBack();
-            
+
             return false;
         }
     }

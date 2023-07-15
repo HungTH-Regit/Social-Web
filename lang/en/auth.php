@@ -15,7 +15,7 @@ return [
     'password_new' => 'Please check gmail to get your new password',
     'change_password_success' => "Change Password successfully, please login again",
     'incorrect_password' => "Password incorrect, please try again",
-    'password_not_duplicate' => 'Please change password other',
+    'password_not_duplicate' => "Please don't set a new password that is the same as the old password",
 
     'title_form_login' => 'Sign in',
     'title_form_register' => 'Sign up',

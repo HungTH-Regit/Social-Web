@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
     <div class="layout-detail">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <p>{!! $blog->content !!}</p>
+                    <p>{!! nl2br(e($blog->content)) !!}</p>
                 </div>
             </div>
         </div>
@@ -70,7 +70,9 @@
             <div class="list-blog-related related-img">
                 @foreach ($relatedBlogs as $item)
                     <a href="{{ route('blog.detail', ['blog'=> $item]) }}" class="item-blog">
-                        <img src="{{ asset('storage/'.$item->image) }}" alt="">
+                        <div class="img-blog">
+                            <img src="{{ asset('storage/'.$item->image) }}" alt="">
+                        </div>
                         <div class="title-blog">{{ $item->title }}</div>
                     </a>
                 @endforeach
@@ -80,48 +82,26 @@
             <div class="title">{{ __('blog.title_comments') }}</div>
             <div class="line-title"></div>
             @if (Auth::check())
-                <form method="POST" action="{{ route('comment.store', ['blog' => $blog]) }}" class="send-comment">
-                    @csrf
+                <div class="send-comment">
                     <img src="{{ asset('storage/'. Auth::user()->avatar) }}" alt="">
-                    <textarea name="content" id="" placeholder="Input your comment . . . . "></textarea>
-                    <button>{{ __('comment.btn_send_comment') }}</button>
-                </form>
-            @endif
-            @foreach ($comments as $key => $comment)
-                @if ($key > 4)
-                    <div class="item-comment hidden">
-                @else
-                    <div class="item-comment">
-                @endif
-                    <img src="{{ asset('storage/'. $comment->user->avatar) }}" alt="">
-                    <div class="info-comment">
-                        <h3>{{ $comment->user->user_name }}</h3>
-                        @can ('update', $comment)
-                            <form action="{{ route('comment.update', ['comment' => $comment]) }}" method="POST" class="form-edit-comment">
-                                @method("PUT")
-                                @csrf
-                                <textarea name="content" id="" class="textarea-update item-form-edit">{{ $comment->content }}</textarea>
-                                <button class="item-form-edit">{{ __('comment.btn_save') }}</button>
-                            </form>
-                            <p class="content-my-comment">{{ $comment->content }}</p>
-                        @else
-                            <p class="content-comment">{{ $comment->content }}</p>
-                        @endcan
-                        <p class="time-comment">{{ $comment->created_at->diffForHumans() }}</p>
-                    </div>
-                    @canany (['update', 'delete'], $comment)
-                        <i class="fa-solid fa-ellipsis-vertical icon-option-comment"></i>
-                        <form action="{{ route('comment.delete', ['comment' => $comment]) }}" method="POST" class="box-option-comment">
-                            @method("DELETE")
-                            @csrf
-                            <p class="item-option-comment option-edit">{{ __('comment.option_edit') }}</p>
-                            <button type='submit' class="item-option-comment" >{{ __('comment.option_delete') }}</button>
-                        </form>
-                    @endcan
+                    <textarea name="content" id="contentComment" placeholder="Input your comment . . . . "></textarea>
+                    <button data-route="{{ route('comment.store', ['blog' => $blog]) }}" id="sendComment">
+                        {{ __('comment.btn_send_comment') }}
+                    </button>
                 </div>
-            @endforeach
-            @if ($comments->count() > 5)
-                <p class="show-all-comment" id='showAllComment'>View more comments...</p>
+            @endif
+            <div class="all-comment">
+                @include ('layouts.components.item_comment', ['comments', $comments])
+            </div>
+            @if ($blog->comments()->count() > 5)
+                <div id="viewMoreComment"
+                    class="show-all-comment" 
+                    data-id="{{ $blog->id }}" 
+                    data-route="{{ route('comment.view.more') }}"
+                    data-page-last="{{ $comments->lastPage() }}"
+                >
+                    {{ __('blog.text_view_more') }}
+                </div>
             @endif
         </div>
     </div>
@@ -143,14 +123,7 @@
         </div>
     </div>
 
-    @section('js')
-        @vite(['resources/js/setup.js'])
-        @vite(['resources/js/detail.js'])
-    @endsection
-    <script>
-        $('#showAllComment').click(function() {
-            $('.item-comment.hidden').css('display', 'flex');
-            $(this).hide();
-        });
-    </script>
+    @vite(['resources/js/setup.js'])
+    @vite(['resources/js/detail.js'])
+    @vite(['resources/js/comment.js'])
 @endsection

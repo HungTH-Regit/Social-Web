@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
     <div class="img-title">
@@ -10,7 +10,7 @@
             <select type="text" name="category_id" class="select-category item-input">
                 <option value="0">{{ __('blog.title_select_category')}}</option>
                 @foreach ($categories as $item)
-                    <option value="{{ route('user.blog', ['id' => $item->id]) }}"
+                    <option value="{{ route('user.blog', ['id' => $item->id, 'data' => request()->data]) }}"
                         @if (request()->id == $item->id) selected @endif
                     >
                         {{ $item['name'] }}
@@ -40,7 +40,7 @@
                             </div>
                             <div class="text-detail">
                                 <p>{{ $item['title'] }}</p>
-                                <p>{!! Str::limit($item->content, 100) !!}</p>
+                                <p>{{ Str::limit($item->content, 100) }}</p>
                             </div>
                             <div class="text-link">
                                 <button class="btn btn-details">
@@ -54,7 +54,7 @@
                     </div>
                 @endforeach
             </div>
-            @include('layouts.paginate')
+            @include('layouts.components.pagination')
         @endif
     </div>
 @endsection

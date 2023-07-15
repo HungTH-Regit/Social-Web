@@ -30,7 +30,7 @@ class PostController extends Controller
         $this->authorize('isAdmin', User::class);
         $blogs = isset($request->data) ?
             $this->postServiceAdmin->searchBlog($request->all(), $status) :
-            $this->postServiceAdmin->getAllBlog($status) ;
+            $this->postServiceAdmin->getAllBlog($status);
 
         return view('admin.blog', [
             'blogs' => $blogs,

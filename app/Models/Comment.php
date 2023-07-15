@@ -13,6 +13,8 @@ class Comment extends Model
 
     protected $table = "comments";
 
+    const LIMIT_COMMENT_DEFAULT = 5;
+
     protected $fillable = [
         'user_id',
         'post_id',

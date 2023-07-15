@@ -1,4 +1,4 @@
-@extends('admin.layouts.components')
+@extends('layouts.admin.base')
 
 @section('title_page')
   <h1>{{ __('admin.title_page_blog') }}</h1>
@@ -65,7 +65,7 @@
                                     {{ Str::limit($blog->title, 30) }}
                                 </td>
                                 <td class='hide-mobile'>
-                                    {{ Str::limit($blog->content, 50) }}
+                                    {{ Str::limit($blog->content, 50) }}...
                                 </td>
                                 <td class="project-state status-blog">
                                     <form action="{{ route('admin.blog.update.status', ['blog' => $blog]) }}" method="POST">
@@ -113,7 +113,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                @include('layouts.paginate')
+                @include('layouts.components.pagination')
             </div>
         </div>
     </section>

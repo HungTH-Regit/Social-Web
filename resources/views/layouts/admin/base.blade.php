@@ -15,21 +15,6 @@
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-              <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-                <i class="fa-solid fa-bars"></i>
-              </a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('admin.dashboard') }}" class="nav-link">{{ __('admin.content_header_manager') }}</a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('blogs.home') }}" class="nav-link">{{ __('admin.content_header_home') }}</a>
-          </li>
-        </ul>
-      </nav>
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="{{ route('blogs.home') }}" class="brand-link">
             <img src="{{ Vite::asset('resources/images/LogoRegit.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8"/>
@@ -66,7 +51,7 @@
                   @if (Route::is('admin.blog.index') || Route::is('admin.blog.not.approved')) 
                     menu-is-opening menu-open
                   @endif
-                ">
+                 ">
                   <a href="{{ route('admin.blog.index', ['status' =>  App\Models\Post::STATUS_ALL_BLOG]) }}" 
                     class="nav-link @if (Route::is('admin.blog.index')) active @endif" 
                   >
@@ -100,13 +85,22 @@
                     </li>
                   </ul>
                 </li>
+                <li class="nav-item">
+                  <form method="POST" action="{{ route('logout') }}" class="nav-link">
+                    @csrf
+                    <button>
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                      <p>{{ __('admin.navbar_logout') }}</p>
+                    </button>
+                  </form>
+              </li>
               </ul>
             </nav>
         </div>
       </aside>
       <div class="content-wrapper">
         <div class="notification">
-          @include('layouts.notification')
+          @include('layouts.components.notification')
         </div>
         <section class="content-header">
           <div class="container-fluid">

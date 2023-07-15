@@ -16,12 +16,11 @@ class PostService
     public function getAllBlogPublic(array $dataSearch = []): LengthAwarePaginator
     {
         $query = Post::approved();
-        if (isset($dataSearch['data'])) {
-            $query->where('title', 'like', '%' . $dataSearch['data'] . '%')
-                ->orWhere('content', 'like', '%' . $dataSearch['data'] . '%');
+        if ($dataSearch['data']) {
+            $query->where('title', 'like', '%' . $dataSearch['data'] . '%');
         }
-        if (isset($dataSearch['categoryId'])) {
-            $query->where(['category_id' => $dataSearch['categoryId']]);
+        if ($dataSearch['categoryId']) {
+            $query->where('category_id', $dataSearch['categoryId']);
         }
 
         return $query->with('user')
@@ -80,8 +79,8 @@ class PostService
 
     public function deleteBlog(object $blog): bool
     {
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $blog->likes()->detach();
             Comment::where('id', $blog->id)->delete();
             $blog->delete();
@@ -90,7 +89,7 @@ class PostService
             return true;
         } catch (Exception $e) {
             DB::rollBack();
-            
+
             return false;
         }
     }

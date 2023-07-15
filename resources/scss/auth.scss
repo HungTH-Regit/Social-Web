@@ -33,8 +33,11 @@
             border: 1px solid $border-input;
             border-radius: 4px;
         }
-        span, small {
+        .notify-error, small {
             color: red;
+        }
+        .notify-success {
+            color: $color-success;
         }
         .input-password {
             margin-bottom: 16px;

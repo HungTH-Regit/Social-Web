@@ -1,11 +1,11 @@
-@extends('layouts.auth') 
+@extends('layouts.authentication.base') 
 
 @section('content')
     <form method="POST" action="{{ route('post.register') }}" class="form-auth form-auth-register">
         @csrf
         <a href="{{ route('blogs.home') }}" class="form-auth-logo">
             <img src="{{ Vite::asset('resources/images/LogoRegit.png') }}" alt="">
-            <h4>RT-Blogs</h4>
+            <h4>{{ __('app.name_website') }}</h4>
         </a>
         <div class="form-auth-title">
             <p>{{ __('auth.title_form_register') }}</p>

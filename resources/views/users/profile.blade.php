@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
     <div class="layout-profile">
-        <form method="POST" action="{{ route('user.update', ['user' => $profile]) }}" enctype="multipart/form-data" class="profile">
+        <form method="POST" action="{{ route('user.update', ['user' => $profile]) }}" enctype="multipart/form-data" class="my-profile">
             @csrf
             @method("PUT")
             <div class="avatar-user">
@@ -24,11 +24,18 @@
             <div class="btn btn-edit-profile">{{ __('user.btn_edit_profile') }}</div>
             <button class="btn btn-save">{{ __('user.btn_save') }}</button>
         </form>
-        <div class="blog">
+        <div class="my-blog">
             @if ($profile->blogs->count() > 0)
                 <h2 class="title">{{ __('user.title_my_blog') }}</h2>
                 <div class="all-blog">
-                    @foreach ($profile->blogs as $item)
+                    @foreach ($profile->blogs as $index => $item)
+                        @if ($index == 5)
+                            <a href="{{ route('user.blog') }}" class="arrow-right item-blog">
+                                <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                                <p>See All Blog</p>
+                            </a>
+                            @break
+                        @endif
                         <a href="{{ route('blog.detail', ['blog'=> $item]) }}" class="item-blog">
                             <img src="{{ asset('storage/'.$item->image) }}" alt="">
                             <div class="info-blog">
@@ -43,29 +50,5 @@
             @endif
         </div>
     </div>
-    <script>
-        $('.btn-edit-profile').click(function() {
-            $('.btn-save').show();
-            $('.btn-upload').show();
-            $('.text-user-name').hide();
-            $('.input-user-name').show();
-            $(this).hide();
-        });
-
-        $('.btn-upload').click(function() {
-            $('.upload-avatar-user').click();
-        });
-
-        $('.upload-avatar-user').change(function () {
-            const file = $('.upload-avatar-user')[0].files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const imageUrl = e.target.result;
-                    $('.image-preview').attr('src', ` ${imageUrl}`);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+    @vite(['resources/js/user.js'])
 @endsection

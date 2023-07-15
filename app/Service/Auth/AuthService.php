@@ -44,10 +44,9 @@ class AuthService
         return false;
     }
 
-    public function verifyEmail(string $token): string
+    public function verifyEmail(string $token): string|bool
     {
         $user = User::where('token_verify_email', $token)->first();
-
         if (!$user) {
             return __('auth.email_unregistered');
         }
@@ -57,13 +56,13 @@ class AuthService
                 'status' => User::STATUS_ACTIVE
             ]);
 
-            return __('auth.verify_success');
-        } 
-        
+            return true;
+        }
+
         return __('auth.verified');
     }
 
-    public function forgotPassword(string $email): string
+    public function forgotPassword(string $email): bool
     {
         $user = User::where(['email' => $email, 'status' => User::STATUS_ACTIVE])->first();
         if ($user) {
@@ -73,14 +72,14 @@ class AuthService
                 $dataSendMail = ['token' => $tokenResetPassword];
                 Mail::to($email)->send(new ForgotPassword($dataSendMail));
 
-                return __('auth.forgot_password_check_mail');
+                return true;
             }
         }
 
-        return __('auth.forgot_password_error');
+        return false;
     }
 
-    public function createPasswordNew(string $token): string
+    public function createPasswordNew(string $token): bool
     {
         $itemPasswordReset = PasswordResetToken::where(['token' => $token])->first();
         if ($itemPasswordReset) {
@@ -91,9 +90,9 @@ class AuthService
             Mail::to($user->email)->send(new SendPassword($dataSendMail));
             $itemPasswordReset->delete();
 
-            return __('auth.password_new');
+            return true;
         }
 
-        return __('auth.try_again');
+        return false;
     }
 }

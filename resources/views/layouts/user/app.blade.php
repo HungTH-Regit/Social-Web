@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     @vite(['resources/js/home.js'])
     @vite(['resources/scss/app.scss'])
-    @yield('js')
 </head>
 <body>
     <div class="header">
@@ -37,6 +36,7 @@
                     @else
                         <form action="{{ route('blog.search') }}" method="GET" class="search-header">
                     @endif
+                        <input type="text" hidden name='id' value="{{ request()->id }}">
                         <input type="text" name="data"
                             @if (request()->data)
                                 value="{{ request()->data }}" 
@@ -99,12 +99,13 @@
             @else
                 <form action="{{ route('blog.search') }}" method="GET" class="search-header">
             @endif
+                <input type="text" hidden name='id' value="{{ request()->id }}">
                 <input type="text" name="data"
                     @if (request()->data)
                         value="{{ request()->data }}" 
                     @else 
                         placeholder="Search blog" 
-                    @endif
+                    @endif 
                 >
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
@@ -158,7 +159,7 @@
     </div>
     <div class="body">
         <div class="notification">
-            @include('layouts.notification')
+            @include('layouts.components.notification')
         </div>
         @yield('content')
     </div>

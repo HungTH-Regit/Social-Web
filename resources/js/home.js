@@ -18,6 +18,7 @@ $('.upload-image-blog').change(function () {
         reader.onload = function (e) {
             const imageUrl = e.target.result;
             $('.img-preview').html(` <img src = "${imageUrl}" alt = "Image Preview" > `);
+            $('.img-preview').show();
         };
         reader.readAsDataURL(file);
     }

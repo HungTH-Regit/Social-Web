@@ -1,4 +1,4 @@
-@extends('admin.layouts.components')
+@extends('layouts.admin.base')
 
 @section('title_page')
   <h1>{{ __('admin.title_page_dashboard') }}</h1>

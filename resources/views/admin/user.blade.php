@@ -1,4 +1,4 @@
-@extends('admin.layouts.components')
+@extends('layouts.admin.base')
 
 @section('title_page')
   <h1>{{ __('admin.title_page_user') }}</h1>
@@ -36,6 +36,10 @@
                         @else 
                           <i class="fa-solid fa-user-xmark"></i>{{ __('admin.text_user_inactive')}}
                         @endif
+                      </div>
+                      <div class="item-info">
+                        <i class="fa-solid fa-blog"></i>
+                        <p>{{ $user->blogs()->count() }} Blog</p>
                       </div>
                     </div>
                   </div>

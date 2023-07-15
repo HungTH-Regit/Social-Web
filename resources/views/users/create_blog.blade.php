@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
     <div class="layout-create">
@@ -13,12 +13,16 @@
             <div class="form-item">
                 <label for="select_category">Category<span>*</span></label>
                 <select type="text" id="select_category" name="category_id" class="item-input">
+                    <option value="">{{ __('blog.title_select_category')}}</option>
                     @foreach ($categories as $item)
                         <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                     @endforeach
                 </select>
+                @error ('category_id')
+                    <small>{{ $message }}</small>
+                @enderror
             </div>
-            <div class="form-item">
+            <div class="form-item item-title">
                 <label for="title">Title<span>*</span></label>
                 @error ('title')
                     <small>{{ $message }}</small>

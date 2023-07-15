@@ -22,14 +22,29 @@ class CommentController extends Controller
         $this->postService = $postService;
     }
 
-    public function create(CommentRequest $request, Post $blog)
+    public function store(CommentRequest $request, Post $blog)
     {
         $this->authorize('create', Comment::class);
         if ($this->commentService->create($request, $blog)) {
-            return redirect()->back()->with('success', __('comment.notify_create_success'));
-        }
+            $comments = $this->commentService->getAll($blog->id);
+            $tableView = view('layouts.components.item_comment', ['comments' => $comments])->render();
 
-        return redirect()->back()->with('error', __('comment.notify_create_error'));
+            return response()->json([
+                'success' => true,
+                'tableView' => $tableView,
+            ]);
+        }
+    }
+
+    public function viewMore(Request $request)
+    {
+        $comments = $this->commentService->getAll($request->id);
+        $tableView = view('layouts.components.item_comment', ['comments' => $comments])->render();
+
+        return response()->json([
+            'success' => true,
+            'tableView' => $tableView,
+        ]);
     }
 
     public function update(CommentRequest $request, Comment $comment)

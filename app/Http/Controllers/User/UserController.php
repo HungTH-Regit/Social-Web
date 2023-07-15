@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         $this->authorize('update', User::class);
 
-        return view('users.change_password');
+        return view('auth.change_password');
     }
 
     public function updatePassword(ChangePasswordRequest $request)

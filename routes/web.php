@@ -37,7 +37,6 @@ Route::post('likes/{idBlog}', [LikeController::class, 'interactive'])->name('int
 
 Route::group(['as' => 'blog.', 'prefix' => 'blogs'],function () {
     Route::get('/search', [PostController::class, 'allBlogPublic'])->name('search');
-    Route::get('/category', [PostController::class, 'allBlogPublic'])->name('category');
     Route::get('/{blog}/details', [PostController::class, 'detail'])->name('detail')->middleware('view.blog.not.approved');
     Route::get('/create', [PostController::class, 'create'])->name('create');
     Route::post('/store', [PostController::class, 'store'])->name('store');
@@ -47,7 +46,8 @@ Route::group(['as' => 'blog.', 'prefix' => 'blogs'],function () {
 });
 
 Route::group(['as' => 'comment.', 'prefix' => 'comments'],function () {
-    Route::post('{blog}/comment', [CommentController::class, 'create'])->name('store');
+    Route::get('/viewMore', [CommentController::class, 'viewMore'])->name('view.more');
+    Route::post('{blog}/comment', [CommentController::class, 'store'])->name('store');
     Route::put('{comment}/update', [CommentController::class, 'update'])->name('update');
     Route::delete('{comment}/delete', [CommentController::class, 'destroy'])->name('delete');
 });
